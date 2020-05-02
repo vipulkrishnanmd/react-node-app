@@ -1,0 +1,29 @@
+version: '3'
+
+services: 
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
+        volumes: 
+            - "mongodb_data_volume:/data/db"
+    server:
+        build: ./
+        expose: 
+            - "3000"
+        ports: 
+            - "3000:3000"
+        command: npm start
+        depends_on:
+            - mongo
+    client:
+        build: ./webapp
+        expose:
+            - "3006"
+        ports:
+            - "3006:3006"
+        command: serve -s -p 3006 build
+        stdin_open: true
+        tty: true
+volumes: 
+    mongodb_data_volume:
