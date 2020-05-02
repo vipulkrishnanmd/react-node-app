@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo '=== Building Petclinic Docker Image ==='
                 script {
-                    app_one = docker.build("vipulkrishnanmd/react-node-app")
+                    app = docker.build("vipulkrishnanmd/react-node-app")
                 }
             }
         }
