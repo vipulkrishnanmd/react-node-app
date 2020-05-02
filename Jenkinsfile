@@ -9,13 +9,24 @@ pipeline {
                 branch 'master'
             }
             steps {
-                echo '=== Building Petclinic Docker Image ==='
+                echo '=== Building Backend Docker Image ==='
                 script {
-                    app = docker.build("vipulkrishnanmd/react-node-app")
+                    app_backend = docker.build("vipulkrishnanmd/react-node-app")
                 }
             }
         }
-        stage('Push Docker Image') {
+        stage('Build Docker Image for Frontend') {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo '=== Building Frontend Docker Image ==='
+                script {
+                    app_frontend = docker.build("vipulkrishnanmd/react-node-app/webapp")
+                }
+            }
+        }
+        stage('Push Backend Docker Image') {
             when {
                 branch 'master'
             }
@@ -25,8 +36,24 @@ pipeline {
                     GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
                     SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') {
-                        app.push("$SHORT_COMMIT")
-                        app.push("latest")
+                        app_backend.push("$SHORT_COMMIT")
+                        app_backend.push("latest")
+                    }
+                }
+            }
+        }
+        stage('Push Frontend Docker Image') {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo '=== Pushing Image ==='
+                script {
+                    GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+                    SHORT_COMMIT = "${GIT_COMMIT_HASH[0..7]}"
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') {
+                        app_frontend.push("$SHORT_COMMIT")
+                        app_frontend.push("latest")
                     }
                 }
             }
@@ -36,6 +63,8 @@ pipeline {
                 echo '=== Delete the local docker images ==='
                 sh("docker rmi -f vipulkrishnanmd/react-node-app:latest || :")
                 sh("docker rmi -f vipulkrishnanmd/react-node-app:$SHORT_COMMIT || :")
+                sh("docker rmi -f vipulkrishnanmd/react-node-app/webapp:latest || :")
+                sh("docker rmi -f vipulkrishnanmd/react-node-app/webapp:$SHORT_COMMIT || :")
             }
         }
     }
