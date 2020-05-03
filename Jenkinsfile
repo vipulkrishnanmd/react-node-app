@@ -22,7 +22,7 @@ pipeline {
             steps {
                 echo '=== Building Frontend Docker Image ==='
                 script {
-                    app_frontend = docker.build("vipulkrishnanmd/react-node-app/webapp")
+                    app_frontend = docker.build("vipulkrishnanmd/react-node-app-webapp", "-f ./webapp/Dockerfile .")
                 }
             }
         }
