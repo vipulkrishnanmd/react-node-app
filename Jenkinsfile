@@ -67,5 +67,11 @@ pipeline {
                 sh("docker rmi -f vipulkrishnanmd/react-node-app/webapp:$SHORT_COMMIT || :")
             }
         }
+        stage('Deploy (docker-compose') {
+            steps {
+                echo '== re-running docker compose up'
+                sh("ssh -i ~/.ssh/two.pem ubuntu@ec2-52-87-235-195.compute-1.amazonaws.com; cd app; sudo docker-compose up")
+            }
+        }
     }
 }
