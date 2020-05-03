@@ -70,7 +70,7 @@ pipeline {
         stage('Deploy (docker-compose') {
             steps {
                 echo '== re-running docker compose up'
-                sh("sudo ssh -t -i /home/ec2-user/.ssh/two.pem ubuntu@ec2-52-87-235-195.compute-1.amazonaws.com 'cd app && sudo docker-compose up'")
+                sh("sudo ssh -tt -i /home/ec2-user/.ssh/two.pem ubuntu@ec2-52-87-235-195.compute-1.amazonaws.com 'cd app && sudo docker-compose up'")
             }
         }
     }
