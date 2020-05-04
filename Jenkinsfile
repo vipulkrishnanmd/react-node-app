@@ -71,7 +71,7 @@ pipeline {
             steps {
                 echo '== re-running docker compose up'
                 // sh("sudo ssh -o StrictHostKeyChecking=no -i /home/ec2-user/.ssh/two.pem ubuntu@ec2-18-234-79-198.compute-1.amazonaws.com 'cd app'")
-                sshagent (credentials: ['deploy-dev']) {
+                sshagent (credentials: ['two']) {
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@ec2-18-234-79-198.compute-1.amazonaws.com "cd app; sudo docker-compose up"'
                 }
             }
