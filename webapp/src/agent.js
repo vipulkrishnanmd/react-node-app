@@ -3,7 +3,7 @@ import _superagent from "superagent";
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = "http://server:3000";
+const API_ROOT = "http://ec2-18-212-23-184.compute-1.amazonaws.com:3000";
 
 const encode = encodeURIComponent;
 const responseBody = (res) => res.body;
