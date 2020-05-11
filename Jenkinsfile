@@ -75,7 +75,7 @@ pipeline {
                     server_url = readFile('/mnt/server_url')
                 }
                 sshagent (credentials: ['serverKey']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@$(sudo cat ~/server_url) "cd app;  sudo docker-compose down; sudo docker-compose pull; sudo docker-compose up --detach"'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@${server_url} "cd app;  sudo docker-compose down; sudo docker-compose pull; sudo docker-compose up --detach"'
                 }
             }
         }
