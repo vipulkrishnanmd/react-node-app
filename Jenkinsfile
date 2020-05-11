@@ -68,11 +68,14 @@ pipeline {
             }
         }
         stage('Deploy (docker-compose') {
+            environment {
+                server_url = readFile("/mnt/server_url")
+            }
             steps {
                 echo '== re-running docker compose up'
                 // sh("sudo ssh -o StrictHostKeyChecking=no -i /home/ec2-user/.ssh/two.pem ubuntu@ec2-18-234-79-198.compute-1.amazonaws.com 'cd app'")
                 sshagent (credentials: ['serverKey']) {
-                    def server_url = readFile("/mnt/server_url")
+                    server_url = readFile("/mnt/server_url")
                     sh "ssh -o StrictHostKeyChecking=no ubuntu@${server_url} 'cd app;  sudo docker-compose down; sudo docker-compose pull; sudo docker-compose up --detach'"
                 }
             }
