@@ -71,6 +71,7 @@ pipeline {
             steps {
                 echo '== re-running docker compose up'
                 // sh("sudo ssh -o StrictHostKeyChecking=no -i /home/ec2-user/.ssh/two.pem ubuntu@ec2-18-234-79-198.compute-1.amazonaws.com 'cd app'")
+                server_url = readFile('/mnt/server_url')
                 sshagent (credentials: ['serverKey']) {
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@$(sudo cat ~/server_url) "cd app;  sudo docker-compose down; sudo docker-compose pull; sudo docker-compose up --detach"'
                 }
