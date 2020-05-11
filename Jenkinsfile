@@ -72,7 +72,7 @@ pipeline {
                 echo '== re-running docker compose up'
                 // sh("sudo ssh -o StrictHostKeyChecking=no -i /home/ec2-user/.ssh/two.pem ubuntu@ec2-18-234-79-198.compute-1.amazonaws.com 'cd app'")
                 sshagent (credentials: ['serverKey']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@$(sudo cat /mnt/server_url) "cd app;  sudo docker-compose down; sudo docker-compose pull; sudo docker-compose up --detach"'
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@$(sudo cat ~/server_url) "cd app;  sudo docker-compose down; sudo docker-compose pull; sudo docker-compose up --detach"'
                 }
             }
         }
