@@ -82,6 +82,9 @@ pipeline {
         stage('Deploy Kube') {
             steps {
                 kubernetesDeploy configs: '**/kubernetes/*', kubeConfig: [path: ''], kubeconfigId: 'kube', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                withCredentials([kubeconfigContent(credentialsId: 'kube', variable: 'KUBECONFIG_CONTENT')]) {
+                    sh('echo "$KUBECONFIG_CONTENT" > kubeconfig && cat kubeconfig && rm kubeconfig')
+                }
             }
         }
     }
