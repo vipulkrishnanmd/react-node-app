@@ -9,10 +9,10 @@ const routerInstance = new Router();
  */
 const MessageController = require("../controllers/MessageController");
 
-routerInstance.get("/message", MessageController.findAll);
-routerInstance.get("/message/:id", MessageController.findById);
-routerInstance.post("/message", MessageController.create);
-routerInstance.del("/message/:id", MessageController.delete);
-routerInstance.put("/message/:id", MessageController.update);
+routerInstance.get("/api/message", MessageController.findAll);
+routerInstance.get("/api/message/:id", MessageController.findById);
+routerInstance.post("/api/message", MessageController.create);
+routerInstance.del("/api/message/:id", MessageController.delete);
+routerInstance.put("/api/message/:id", MessageController.update);
 
 module.exports = routerInstance;

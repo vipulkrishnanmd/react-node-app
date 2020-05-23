@@ -10,5 +10,5 @@ FROM node:12.16.0
 WORKDIR /client
 COPY --from=base /client /client
 RUN yarn global add serve
-CMD serve -s build
-EXPOSE 5000
+CMD serve -s -p 3006 build
+EXPOSE 3006

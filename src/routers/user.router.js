@@ -9,8 +9,8 @@ const routerInstance = new Router();
  */
 const UserController = require("../controllers/UserController");
 
-routerInstance.post("/user/signup", UserController.create);
-routerInstance.get("/user/:username", UserController.findByUsername);
-routerInstance.post("/user/login", UserController.login);
+routerInstance.post("/api/user/signup", UserController.create);
+routerInstance.get("/api/user/:username", UserController.findByUsername);
+routerInstance.post("/api/user/login", UserController.login);
 
 module.exports = routerInstance;

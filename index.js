@@ -39,7 +39,7 @@ server.pre(cors.preflight)
 server.use(cors.actual)
 
 server.use(rjwt(config.jwt).unless({
-    path: ['/user/signup', '/user/login']
+    path: ['api/user/signup', 'api/user/login']
 }));
 
 

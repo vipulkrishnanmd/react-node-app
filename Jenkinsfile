@@ -79,5 +79,10 @@ pipeline {
                 }
             }
         }
+        stage('Deploy Kube') {
+            steps {
+                kubernetesDeploy configs: '**/kubernetes/*', kubeConfig: [path: ''], kubeconfigId: 'kube', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+            }
+        }
     }
 }
