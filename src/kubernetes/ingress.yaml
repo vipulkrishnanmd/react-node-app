@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1 # for versions before 1.14 use extensions/v1beta1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    # nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: a748fe0b6e8a849eda022f7a11ab341a-186e216b342b7ebc.elb.us-east-2.amazonaws.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: webapp
+          servicePort: 8080
+      - path: /api
+        backend:
+          serviceName: api
+          servicePort: 3000

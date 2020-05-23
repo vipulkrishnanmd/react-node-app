@@ -83,7 +83,9 @@ pipeline {
             steps {
                 kubernetesDeploy configs: '**/kubernetes/*', kubeConfig: [path: ''], kubeconfigId: 'kube', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
                 withCredentials([kubeconfigContent(credentialsId: 'kube', variable: 'KUBECONFIG_CONTENT')]) {
-                    sh('echo "$KUBECONFIG_CONTENT" > kubeconfig && cat kubeconfig && rm kubeconfig')
+                    sh('echo "$KUBECONFIG_CONTENT" > kubeconfig')
+                    sh('kubectl --kubeconfig=kubeconfig apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-0.32.0/deploy/static/provider/aws/deploy.yaml')
+                    sh('rm kubeconfig')
                 }
             }
         }
