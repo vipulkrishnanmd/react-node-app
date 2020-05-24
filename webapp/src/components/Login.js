@@ -39,7 +39,7 @@ class Login extends React.Component {
         <div className="container page">
           <div className="row">
             <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign in</h1>
+              <h1 className="text-xs-center">Login</h1>
               <p className="text-xs-center">
                 <Link to="/register">Don't Have an account?</Link>
               </p>

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: vipulkrishnanmd/react-node-app
+        image: vipulkrishnanmd/react-node-app:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
