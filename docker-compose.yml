@@ -22,7 +22,7 @@ services:
             - "3006"
         ports:
             - "3006:3006"
-        command: serve -s -p 3006 build
+        command: npm start
         stdin_open: true
         tty: true
 volumes: 
