@@ -52,16 +52,6 @@ cat > docker_credential.xml <<EOF
 </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
 EOF
 
-cat > git_credential.xml <<EOF
-<com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
-  <scope>GLOBAL</scope>
-  <id>gitHubCredentials</id>
-  <description></description>
-  <username>vipulkrishnanmd</username>
-  <password>${git_password}</password>
-</com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
-EOF
-
 cat > server_credential.xml <<EOF
 <com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey plugin="ssh-credentials">
   <scope>GLOBAL</scope>
@@ -75,7 +65,6 @@ cat > server_credential.xml <<EOF
 EOF
 
 sudo java -jar jenkins-cli.jar -s http://localhost:8080/ -auth admin:"$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)" create-credentials-by-xml system::system::jenkins "(global)" < docker_credential.xml
-sudo java -jar jenkins-cli.jar -s http://localhost:8080/ -auth admin:"$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)" create-credentials-by-xml system::system::jenkins "(global)" < git_credential.xml
 sudo java -jar jenkins-cli.jar -s http://localhost:8080/ -auth admin:"$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)" create-credentials-by-xml system::system::jenkins "(global)" < server_credential.xml
 
 cat > job.xml <<EOF
@@ -113,7 +102,6 @@ cat > job.xml <<EOF
         <source class="org.jenkinsci.plugins.github_branch_source.GitHubSCMSource" plugin="github-branch-source">
           <id>3f1cb5fe-28a1-4a37-8ffa-11a706f6c197</id>
           <apiUri>https://api.github.com</apiUri>
-          <credentialsId>gitHubCredentials</credentialsId>
           <repoOwner>vipulkrishnanmd</repoOwner>
           <repository>react-node-app</repository>
           <repositoryUrl>https://github.com/vipulkrishnanmd/react-node-app.git</repositoryUrl>
