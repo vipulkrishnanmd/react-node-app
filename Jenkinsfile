@@ -81,6 +81,8 @@ pipeline {
         }
         stage('Deploy Kube') {
             steps {
+                // This is failing due to some plugin inssue. https://github.com/jenkinsci/kubernetes-cd-plugin/issues/134
+                // So, downloading the files and running the commands below.
                 // kubernetesDeploy configs: '**/kubernetes/*', kubeConfig: [path: ''], kubeconfigId: 'kube', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
                 withCredentials([kubeconfigContent(credentialsId: 'kube', variable: 'KUBECONFIG_CONTENT')]) {
                     sh('echo "$KUBECONFIG_CONTENT" > kubeconfig')
