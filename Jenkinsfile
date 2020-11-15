@@ -86,7 +86,7 @@ pipeline {
                     sh('echo "$KUBECONFIG_CONTENT" > kubeconfig')
                     sh('wget https://github.com/vipulkrishnanmd/react-node-app/archive/master.zip')
                     sh('unzip master.zip')
-                    sh('kubectl --kubeconfig=kubeconfig apply -f react-node-app/kubernetes')                    
+                    sh('kubectl --kubeconfig=kubeconfig apply -f react-node-app-master/kubernetes')                    
                     sh('kubectl --kubeconfig=kubeconfig apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-0.32.0/deploy/static/provider/aws/deploy.yaml')
                     sh('rm kubeconfig')
                 }
