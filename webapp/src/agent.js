@@ -3,7 +3,7 @@ import _superagent from "superagent";
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = window.location.protocol+'//'+ window.location.hostname+":3000/api"; // TODO: change it to /api for kube
+const API_ROOT = window.location.protocol+'//'+ window.location.hostname+"/api"; // TODO: change it to /api for kube, ":3000/api" local
 
 const encode = encodeURIComponent;
 const responseBody = (res) => res.body;
