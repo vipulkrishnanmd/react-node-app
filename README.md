@@ -11,3 +11,5 @@ Jenkins, then builds both front-end and backend, containerizes them and pushes t
 In the 'single server instance' flow, Terraform creates a single server instance in addition to Jenkins instance. The login credentials for this instance are given to the Jenkins instance. After building and pushing the containers, Jenkins logs into the server instance, pulls the containers and runs `docker-compose` command to start the app on the instance.
 
 In the Kubernetes flow, Terraform crates a Kubernetes cluster and Jenkins deploys the app on Kubernetes.
+
+[Click to see the demo video](https://bit.ly/3mNPuuc)
