@@ -86,9 +86,9 @@ pipeline {
                 // kubernetesDeploy configs: '**/kubernetes/*', kubeConfig: [path: ''], kubeconfigId: 'kube', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
                 withCredentials([kubeconfigContent(credentialsId: 'kube', variable: 'KUBECONFIG_CONTENT')]) {
                     sh('echo "$KUBECONFIG_CONTENT" > kubeconfig')
-                    sh('wget https://github.com/vipulkrishnanmd/react-node-app/archive/master.zip')
+                    sh('wget https://github.com/vipulkrishnanmd/single-command-web-infra-setup/archive/master.zip')
                     sh('unzip -o master.zip')
-                    sh('kubectl --kubeconfig=kubeconfig apply -f react-node-app-master/kubernetes')                    
+                    sh('kubectl --kubeconfig=kubeconfig apply -f single-command-web-infra-setup-master/kubernetes')                    
                     sh('kubectl --kubeconfig=kubeconfig apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-0.32.0/deploy/static/provider/aws/deploy.yaml')
                     sh('rm kubeconfig')
                 }

@@ -103,8 +103,8 @@ cat > job.xml <<EOF
           <id>3f1cb5fe-28a1-4a37-8ffa-11a706f6c197</id>
           <apiUri>https://api.github.com</apiUri>
           <repoOwner>vipulkrishnanmd</repoOwner>
-          <repository>react-node-app</repository>
-          <repositoryUrl>https://github.com/vipulkrishnanmd/react-node-app.git</repositoryUrl>
+          <repository>single-command-web-infra-setup</repository>
+          <repositoryUrl>https://github.com/vipulkrishnanmd/single-command-web-infra-setup.git</repositoryUrl>
           <traits>
             <org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait>
               <strategyId>1</strategyId>
